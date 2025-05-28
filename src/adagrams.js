@@ -58,18 +58,43 @@ export const drawLetters = () => {
     // const totalLettersCount = Object.values(letterPool).reduce((sum, count) => sum + count, 0);
     const totalLettersCount = letterPoolList.length; 
     const draw = Math.floor(Math.random() * totalLettersCount);
-    const letter = letterPoolList[draw];
-    lettersInHand.push(letter);
+    const drawLetter = letterPoolList[draw];
+    lettersInHand.push(drawLetter);
     letterPoolList.splice(draw, 1);
   };
   return lettersInHand;
 };
 
-console.log(drawLetters());
 
 // Implement this method for wave 2
 export const usesAvailableLetters = (input, lettersInHand) => {
+  const inputDict = input
+  .toUpperCase()
+  .split('')
+  .reduce((letterFreq, letter) => {
+    letterFreq[letter] = (letterFreq[letter] || 0) + 1;
+    return letterFreq;
+  }, {}
+);
+const handDict = lettersInHand.reduce((acc, letter) => {
+  acc[letter] = (acc[letter] || 0) + 1;
+  return acc;
+}, {}
+);
+
+for (const [character, frequency] of Object.entries(inputDict)) {
+  if (!(character in handDict)) {
+    return false;
+  } else {
+    if (frequency > handDict[character]) {
+      return false;
+    }
+  };
 };
+return true;
+};
+
+console.log(usesAvailableLetters('WORD', drawLetters()));
 
 // export const scoreWord = (word) => {
 //   // Implement this method for wave 3
