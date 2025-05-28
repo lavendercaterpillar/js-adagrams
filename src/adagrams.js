@@ -55,9 +55,9 @@ export const drawLetters = () => {
   const lettersInHand = [];
   
   for (let i = 1; i <= HandSize; i++) {
-    // const totalLetters = Object.values(letterPool).reduce((sum, count) => sum + count, 0);
-    const totalLetters = letterPoolList.length; 
-    const draw = Math.floor(Math.random() * totalLetters);
+    // const totalLettersCount = Object.values(letterPool).reduce((sum, count) => sum + count, 0);
+    const totalLettersCount = letterPoolList.length; 
+    const draw = Math.floor(Math.random() * totalLettersCount);
     const letter = letterPoolList[draw];
     lettersInHand.push(letter);
     letterPoolList.splice(draw, 1);
@@ -67,9 +67,9 @@ export const drawLetters = () => {
 
 console.log(drawLetters());
 
-// export const usesAvailableLetters = (input, lettersInHand) => {
-//   // Implement this method for wave 2
-// };
+// Implement this method for wave 2
+export const usesAvailableLetters = (input, lettersInHand) => {
+};
 
 // export const scoreWord = (word) => {
 //   // Implement this method for wave 3
