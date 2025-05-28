@@ -75,31 +75,52 @@ export const usesAvailableLetters = (input, lettersInHand) => {
     letterFreq[letter] = (letterFreq[letter] || 0) + 1;
     return letterFreq;
   }, {}
-);
-const handDict = lettersInHand.reduce((acc, letter) => {
-  acc[letter] = (acc[letter] || 0) + 1;
-  return acc;
-}, {}
-);
+  );
+  const handDict = lettersInHand.reduce((acc, letter) => {
+    acc[letter] = (acc[letter] || 0) + 1;
+    return acc;
+  }, {}
+  );
 
-for (const [character, frequency] of Object.entries(inputDict)) {
-  if (!(character in handDict)) {
-    return false;
-  } else {
-    if (frequency > handDict[character]) {
+  for (const [character, frequency] of Object.entries(inputDict)) {
+    if (!(character in handDict)) {
       return false;
-    }
+    } else {
+      if (frequency > handDict[character]) {
+        return false;
+      }
+    };
   };
-};
 return true;
 };
 
-console.log(usesAvailableLetters('WORD', drawLetters()));
 
-// export const scoreWord = (word) => {
-//   // Implement this method for wave 3
-// };
+// Implement this method for wave 3
+export const scoreWord = (word) => {
+  const wordDict = word
+  .toUpperCase()
+  .split('')
+  .reduce((letterFreq, letter) => {
+    letterFreq[letter] = (letterFreq[letter] || 0) + 1;
+    return letterFreq;
+  }, {}
+);
+
+let totalScore = 0;
+
+for (const [letter, frequency] of Object.entries(wordDict)) {
+  totalScore += SCORE_CHART[letter] * frequency;
+};
+
+if (word.length >= 7) {
+  totalScore += 8;
+};
+
+return totalScore;
+};
+
+console.log(scoreWord(''));
 
 // export const highestScoreFrom = (words) => {
-//   // Implement this method for wave 4
+  //   // Implement this method for wave 4
 // };
