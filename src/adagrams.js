@@ -1,4 +1,4 @@
-import { of } from "core-js/core/array";
+// import { of } from "core-js/core/array";
 
 const HandSize = 10
 
@@ -42,32 +42,39 @@ const SCORE_CHART = {
 };
 
 
-// export const makeDict = () => { };
-
 // Implement this method for wave 1
 export const drawLetters = () => {
   let letterPoolList =[]
 
-  for (let [letter, freq] of Object.entries(letterPool)) {
+  for (const [letter, freq] of Object.entries(letterPool)) {
     for (let i = 0; i < freq; i++) {
       letterPoolList.push(letter)
     }; 
   };
   
-  // const totalLetters = Object.values(letterPool).reduce((sum, count) => sum + count, 0);
-  const totalLetters = letterPoolList.length;
-  const draw = Math.floor(Math.random() * totalLetters);
-
+  const lettersInHand = [];
+  
+  for (let i = 1; i <= HandSize; i++) {
+    // const totalLetters = Object.values(letterPool).reduce((sum, count) => sum + count, 0);
+    const totalLetters = letterPoolList.length; 
+    const draw = Math.floor(Math.random() * totalLetters);
+    const letter = letterPoolList[draw];
+    lettersInHand.push(letter);
+    letterPoolList.splice(draw, 1);
+  };
+  return lettersInHand;
 };
 
-export const usesAvailableLetters = (input, lettersInHand) => {
-  // Implement this method for wave 2
-};
+console.log(drawLetters());
 
-export const scoreWord = (word) => {
-  // Implement this method for wave 3
-};
+// export const usesAvailableLetters = (input, lettersInHand) => {
+//   // Implement this method for wave 2
+// };
 
-export const highestScoreFrom = (words) => {
-  // Implement this method for wave 4
-};
+// export const scoreWord = (word) => {
+//   // Implement this method for wave 3
+// };
+
+// export const highestScoreFrom = (words) => {
+//   // Implement this method for wave 4
+// };

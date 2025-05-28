@@ -4,6 +4,7 @@
   "description": "JavaScript version of the Adagrams project",
   "main": "index.js",
   "scripts": {
+    "start": "node src/adagrams.js",
     "test": "jest",
     "lint": "npx eslint",
     "coverage": "open coverage/lcov-report/index.html",
@@ -36,7 +37,7 @@
     "regenerator-runtime": "^0.14.1"
   },
   "dependencies": {
-    "core-js": "^3.38.1",
+    "core-js": "^3.42.0",
     "vorpal": "^1.12.0"
   }
 }
