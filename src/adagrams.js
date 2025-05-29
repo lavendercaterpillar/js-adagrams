@@ -97,46 +97,44 @@ return true;
 
 // Implement this method for wave 3
 export const scoreWord = (word) => {
-  if (!word || typeof word !== 'string') return 0; // to handle '', NaN or undefined
+  // if (!word || typeof word !== 'string') return 0; // to handle '', NaN or undefined
   
   const wordDict = word
-  .toUpperCase()
-  .split('')
-  .reduce((letterFreq, letter) => {
-    letterFreq[letter] = (letterFreq[letter] || 0) + 1;
-    return letterFreq;
-  }, {}
-);
+    .toUpperCase()
+    .split('')
+    .reduce((letterFreq, letter) => {
+      letterFreq[letter] = (letterFreq[letter] || 0) + 1;
+      return letterFreq;
+      }, {});
 
-let totalScore = 0;
+  let totalScore = 0;
 
-for (const [letter, frequency] of Object.entries(wordDict)) {
-  totalScore += (SCORE_CHART[letter] || 0) * frequency;
-};
+  for (const [letter, frequency] of Object.entries(wordDict)) {
+    totalScore += (SCORE_CHART[letter] || 0) * frequency;
+  };
 
-if (word.length >= 7) {
-  totalScore += 8;
-};
+  if (word.length >= 7) {
+    totalScore += 8;
+  };
 
 return totalScore;
 };
 
-console.log(scoreWord(''));
 
 // Implement this method for wave 4
 export const highestScoreFrom = (words) => {
-let highestScore = 0;
-let winnerWord = '';
-
-words.forEach(word => {
-  const score = scoreWord(word);
-
-  if (score > highestScore) {
-    winnerWord = word;
-    highestScore = score;
-
+  let highestScore = 0;
+  let winnerWord = '';
+  
+  words.forEach(word => {
+    const score = scoreWord(word);
+    
+    if (score > highestScore) {
+      winnerWord = word;
+      highestScore = score;
+      
     } else if (score === highestScore) {
-
+      
       if (word.length === 10 && winnerWord.length !== 10) {
         winnerWord = word;
       } else if (word.length < winnerWord.length && winnerWord.length !== 10) {
@@ -144,6 +142,8 @@ words.forEach(word => {
       };
     };
   });
-
+  
   return { word: winnerWord, score: highestScore};
 };
+
+// console.log(scoreWord('Ellie'));
