@@ -123,6 +123,27 @@ return totalScore;
 
 console.log(scoreWord(''));
 
-// export const highestScoreFrom = (words) => {
-  //   // Implement this method for wave 4
-// };
+// Implement this method for wave 4
+export const highestScoreFrom = (words) => {
+let highestScore = 0;
+let winnerWord = '';
+
+words.forEach(word => {
+  const score = scoreWord(word);
+
+  if (score > highestScore) {
+    winnerWord = word;
+    highestScore = score;
+
+    } else if (score === highestScore) {
+
+      if (word.length === 10 && winnerWord.length !== 10) {
+        winnerWord = word;
+      } else if (word.length < winnerWord.length && winnerWord.length !== 10) {
+        winnerWord = word;
+      };
+    };
+  });
+
+  return { word: winnerWord, score: highestScore};
+};
