@@ -46,7 +46,7 @@ const SCORE_CHART = {
 export const drawLetters = () => {
   let letterPoolList =[]
 
-  for (const [letter, freq] of Object.entries(letterPool)) {
+  for (const [letter, freq] of Object.entries(letterPool)) {   //I can use .forEach() here
     for (let i = 0; i < freq; i++) {
       letterPoolList.push(letter)
     }; 
@@ -97,6 +97,8 @@ return true;
 
 // Implement this method for wave 3
 export const scoreWord = (word) => {
+  if (!word || typeof word !== 'string') return 0; // to handle '', NaN or undefined
+  
   const wordDict = word
   .toUpperCase()
   .split('')
@@ -109,7 +111,7 @@ export const scoreWord = (word) => {
 let totalScore = 0;
 
 for (const [letter, frequency] of Object.entries(wordDict)) {
-  totalScore += SCORE_CHART[letter] * frequency;
+  totalScore += (SCORE_CHART[letter] || 0) * frequency;
 };
 
 if (word.length >= 7) {
